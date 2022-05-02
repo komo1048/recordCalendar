@@ -9,8 +9,9 @@ import lombok.ToString;
 @ToString
 public class CalendarDto {
 
-	private int number;
+	private int id;
 	private String title;
 	private String content;
-	private String insertDate;
+	private String start;
+	private String end;
 }

@@ -5,6 +5,14 @@
 
 <mapper namespace="com.record.calendar.calendarDao.CalendarDao">
 	<insert id="insertTodayWork">
-		insert into calendar (title, content, insertDate) value (#{title}, #{content}, #{insertDate})
+		insert into calendar (title, content, start) value (#{title}, #{content}, #{start})
 	</insert>
+	
+	<select id="getAllPlanList" resultType="com.record.calendar.calendarDto.CalendarDto" parameterType="hashMap" >
+		select * from calendar where start <![CDATA[<=]]> #{lastDay} and start <![CDATA[>=]]> #{firstDay}
+	</select>
+	
+	<select id="getSelectPlan" resultType="com.record.calendar.calendarDto.CalendarDto">
+		select * from calendar where start = #{start}
+	</select>
 </mapper>    
