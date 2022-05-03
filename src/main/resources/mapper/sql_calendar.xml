@@ -9,7 +9,7 @@
 	</insert>
 	
 	<select id="getAllPlanList" resultType="com.record.calendar.calendarDto.CalendarDto" parameterType="hashMap" >
-		select * from calendar where start <![CDATA[<=]]> #{lastDay} and start <![CDATA[>=]]> #{firstDay}
+		select * from calendar
 	</select>
 	
 	<select id="getSelectPlan" resultType="com.record.calendar.calendarDto.CalendarDto">

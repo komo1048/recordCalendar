@@ -1,7 +1,5 @@
-let date = new Date(+new Date() + 3240 * 10000).toISOString().split("T")[0];
-let that = this;
 $('DOMcontentLoaded', function(){
-	let getList = getData.getMonthData(date);
+	let date = getData.dateFormatChange(new Date());
 	var calendarEl = document.getElementById('calendar');
 	var calendar = new FullCalendar.Calendar(calendarEl, {
 	    dateClick: function(info){
@@ -21,13 +19,12 @@ $('DOMcontentLoaded', function(){
 				}
 			})
 		},
-		events: getList,
+		events: getData.getMonthData(date),
 	});
-	getData.getPrevNextMonth();
 	calendar.render();
 });
-
 let getData = {
+	
 	getMonthData : function(date){
 		let getMonthData_return;
 		let params = {
@@ -48,15 +45,10 @@ let getData = {
 			});
 		return getMonthData_return;
 	},
-	getPrevNextMonth: function(){
-		$(document).on("click", "#calendar .fc-next-button", function(){
-			let nextMonth = new Date();
-			that.date = new Date(new Date().setMonth(nextMonth.getMonth()+1)).toISOString().split("T")[0];
-		});
 	
-		$(document).on("click", "#calendar .fc-prev-button", function(){
-			let prevForDate = new Date();
-			that.date = new Date(new Date().setMonth(prevForDate.getMonth()-1)).toISOString().split("T")[0];
-		});
+	dateFormatChange : function(change){
+		return change.getFullYear() + "-" + ((change.getMonth() + 1) > 9 ? (change.getMonth() + 1).toString() : "0" + (change.getMonth() + 1)) + "-" + (change.getDate() > 9 ? change.getDate().toString() : "0" + change.getDate().toString());
 	}
 }
+
+
