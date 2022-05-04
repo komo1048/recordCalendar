@@ -15,4 +15,8 @@
 	<select id="getSelectPlan" resultType="com.record.calendar.calendarDto.CalendarDto">
 		select * from calendar where start = #{start}
 	</select>
+	
+	<delete id="deletePlan">
+		delete from calendar where start = #{start}
+	</delete>
 </mapper>    

@@ -22,9 +22,9 @@ public class CalendarController {
 	}
 	
 	@GetMapping("/workSave")
-	public String insertWork(CalendarDto calendarDto) {
-		calendarService.insertTodayWork(calendarDto);
-		return "redirect:/";
+	@ResponseBody
+	public int insertWork(CalendarDto calendarDto) {
+		return calendarService.insertTodayWork(calendarDto);
 	}
 	
 	@GetMapping("/getMyPlan")
@@ -37,5 +37,11 @@ public class CalendarController {
 	@ResponseBody
 	public CalendarDto todayPlan(@RequestParam(value ="start") String start) {
 		return calendarService.getSelectPlan(start);
+	}
+	
+	@GetMapping("/deletePlan")
+	@ResponseBody
+	public int planDelete(@RequestParam(value ="start") String start) {
+		return calendarService.deletePlan(start);
 	}
 }

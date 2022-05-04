@@ -6,24 +6,57 @@ $('DOMcontentLoaded', function(){
 			$("#exampleModal").modal('show');
 			$("#exampleModalLabel").html(info.dateStr+' 한 일');
 			$("#start").val(info.dateStr);
+			
 			let params = {
 				'start' : info.dateStr
-			}
-			$.ajax({
-				type:'get',
-				url:'/getTodayPlan',
-				data: params,
-				success: function(plan){
-					$("#title").val(plan.title);
-					$("#content").val(plan.content);
-				}
-			})
+			};
+			getData.init();
+			post('/getTodayPlan', params, function(plan){
+				$("#title").val(plan.title);
+				$("#content").val(plan.content);
+			});
 		},
 		events: getData.getMonthData(date),
 	});
+	getData.initFn();
 	calendar.render();
 });
 let getData = {
+	
+	init: function(){
+		$("#title").val('');
+		$("#content").val('');
+	},
+	
+	initFn: function(){
+		$('#deletePlan').click(function(){
+			let params = {
+				'start' : $('#start').val()
+			}
+			post('/deletePlan', params, function(result){
+				if(result > 0){
+					alertModal("삭제에 성공했습니다.", "success", 's');
+				}else{
+					alertModal("삭제에 실패했습니다.", "error", 'e');
+				}
+			});
+		});
+		
+		$('#workSave').click(function(){
+			let params = {
+				'start' : $('#start').val(),
+				'title' : $('#title').val(),
+				'content' : $('#content').val()
+			}
+			post('/workSave', params, function(result){
+				if(result > 0){
+					alertModal("등록에 성공했습니다.", "success", "s");
+				}else{
+					alertModal("등록에 실패했습니다.", "error", "e");
+				}
+			});
+		});
+	},
 	
 	getMonthData : function(date){
 		let getMonthData_return;
@@ -51,4 +84,50 @@ let getData = {
 	}
 }
 
+function post(url, param, onSuccess) {
+   return ajax(url, param, "get", onSuccess);
+}
 
+function ajax(url, param, type, onSuccess) {
+	var settings = {
+		dataType	: "json",
+		contentType : "application/x-www-form-urlencoded; charset=UTF-8",
+	};
+	
+	return $.ajax({
+		url    		: url,
+		data   		: param,
+		dataType	: settings.dataType,
+		contentType : settings.contentType,
+		success   	: onSuccess,
+		cache 		: false,
+		type   		: type,
+		async		: false
+	});
+}
+
+function alertModal(text, title, icon) {
+	Swal.fire({
+		title		: title,
+		text		: text,
+		icon		: getAlertModalIcon(icon),
+		showConfirmButton: false,
+		timer: 1500
+	}).then(function(){
+		window.location = window.location.pathname;
+ 	});
+
+}
+function getAlertModalIcon(text){
+	switch (text) {
+	case "w" :
+		return "warning";
+	case "e" :
+		return "error";
+	case "s" :
+		return "success";
+
+	default :
+		return "info";
+	}
+}

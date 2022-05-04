@@ -9,9 +9,11 @@ import com.record.calendar.calendarDto.CalendarDto;
 @Mapper
 public interface CalendarDao {
 
-	public void insertTodayWork(CalendarDto calendarDto);
+	public int insertTodayWork(CalendarDto calendarDto);
 
 	public ArrayList<CalendarDto> getAllPlanList();
 
 	public CalendarDto getSelectPlan(String start);
+
+	public int deletePlan(String start);
 }

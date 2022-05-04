@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang='en'>
+<html lang='ko' xmlns:th="http://www.thymeleaf.org">
   <head>
     <meta charset='utf-8' />
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
@@ -30,7 +30,7 @@
 	        </button>
 	      </div>
 	      <div class="modal-body">
-	        <form action="/workSave" method="get">
+	        <form id="workSaveForm">
 		        <input type="hidden" name="start" id="start"/>
 		          <div class="form-group">
 		            <label for="title" class="col-form-label">제목</label>
@@ -41,8 +41,9 @@
 		            <textarea class="form-control" name="content" id="content"></textarea>
 		          </div>
 			      <div class="modal-footer">
+			      	<button type="button" class="btn btn-danger" id="deletePlan">삭제</button>
 			        <button type="button" class="btn btn-secondary" data-dismiss="modal">닫기</button>
-			        <button type="submit" class="btn btn-primary" id="workdSave">저장</button>
+			        <button type="submit" class="btn btn-primary" id="workSave">저장</button>
 			      </div>
 	     	 </form>
 	      </div>
@@ -50,4 +51,5 @@
 	  </div>
 	</div>
   </body>
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
 </html>
