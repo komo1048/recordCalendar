@@ -10,25 +10,21 @@ import com.record.calendar.calendarDao.CalendarDao;
 import com.record.calendar.calendarDto.CalendarDto;
 import com.record.calendar.calendarService.CalendarService;
 
-
-import sun.applet.Main;
-
 @Service
 public class CalendarServiceImp implements CalendarService{
 
 	@Autowired
 	CalendarDao calendarDao;
 	
-	private static Logger logger = LoggerFactory.getLogger(Main.class);
+	private Logger logger = LoggerFactory.getLogger(this.getClass());
 	
 	@Override
 	public int insertTodayWork(CalendarDto calendarDto) {
 		try {
 			return calendarDao.insertTodayWork(calendarDto);
 		} catch (Exception e) {
-			logger.warn("데이터가 이미 존재합니다.");
+			return calendarDao.updateTodayWork(calendarDto);
 		}
-		return 0;
 	}
 
 	@Override

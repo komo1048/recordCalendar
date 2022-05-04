@@ -16,4 +16,6 @@ public interface CalendarDao {
 	public CalendarDto getSelectPlan(String start);
 
 	public int deletePlan(String start);
+	
+	public int updateTodayWork(CalendarDto calendarDto);
 }

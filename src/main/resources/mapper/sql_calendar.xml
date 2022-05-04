@@ -19,4 +19,8 @@
 	<delete id="deletePlan">
 		delete from calendar where start = #{start}
 	</delete>
+	
+	<update id="updateTodayWork">
+		update calendar set title = #{title}, content = #{content} where start = #{start}
+	</update>
 </mapper>    

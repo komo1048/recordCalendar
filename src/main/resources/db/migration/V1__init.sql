@@ -1,3 +1,5 @@
+drop table if exists calendar;
+
 CREATE TABLE calendar(
 	id int auto_increment,
 	title varchar(50),
