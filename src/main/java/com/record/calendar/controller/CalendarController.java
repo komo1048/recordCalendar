@@ -16,11 +16,6 @@ public class CalendarController {
 	@Autowired
 	CalendarService calendarService;
 	
-	@RequestMapping("/")
-	public String hello() {
-		return "index.html";
-	}
-	
 	@GetMapping("/workSave")
 	@ResponseBody
 	public int insertWork(CalendarDto calendarDto) {

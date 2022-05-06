@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.record.calendar.memberDao.MemberDao">
+    <insert id="registerMember" parameterType="com.record.calendar.memberDto.MemberDto">
+        insert into member (id, password) values (#{id}, #{password})
+    </insert>
+
+    <select id="checkId" parameterType="com.record.calendar.memberDto.MemberDto" resultType="integer">
+        select NVL(count(*),0) from member where id = #{id}
+    </select>
+</mapper>

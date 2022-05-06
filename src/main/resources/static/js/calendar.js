@@ -11,6 +11,10 @@ $('DOMcontentLoaded', function(){
 				'start' : info.dateStr
 			};
 			getData.init();
+			getData.textSpeak(getData.getDayOfWeek(info.dateStr), {
+			    rate : 1,
+			    pitch: 1.2
+			});
 			post('/getTodayPlan', params, function(plan){
 				$("#title").val(plan.title);
 				$("#content").val(plan.content);
@@ -81,53 +85,32 @@ let getData = {
 	
 	dateFormatChange : function(change){
 		return change.getFullYear() + "-" + ((change.getMonth() + 1) > 9 ? (change.getMonth() + 1).toString() : "0" + (change.getMonth() + 1)) + "-" + (change.getDate() > 9 ? change.getDate().toString() : "0" + change.getDate().toString());
-	}
-}
+	},
 
-function post(url, param, onSuccess) {
-   return ajax(url, param, "get", onSuccess);
-}
+	textSpeak : function(dayOfWeek, opt_prop){
+	    if (typeof SpeechSynthesisUtterance === "undefined" || typeof window.speechSynthesis === "undefined") {
+            alert("이 브라우저는 음성 합성을 지원하지 않습니다.")
+            return
+        }
 
-function ajax(url, param, type, onSuccess) {
-	var settings = {
-		dataType	: "json",
-		contentType : "application/x-www-form-urlencoded; charset=UTF-8",
-	};
-	
-	return $.ajax({
-		url    		: url,
-		data   		: param,
-		dataType	: settings.dataType,
-		contentType : settings.contentType,
-		success   	: onSuccess,
-		cache 		: false,
-		type   		: type,
-		async		: false
-	});
-}
+        window.speechSynthesis.cancel();
 
-function alertModal(text, title, icon) {
-	Swal.fire({
-		title		: title,
-		text		: text,
-		icon		: getAlertModalIcon(icon),
-		showConfirmButton: false,
-		timer: 1500
-	}).then(function(){
-		window.location = window.location.pathname;
- 	});
+        const prop = opt_prop || {};
 
-}
-function getAlertModalIcon(text){
-	switch (text) {
-	case "w" :
-		return "warning";
-	case "e" :
-		return "error";
-	case "s" :
-		return "success";
+        const speechMsg = new SpeechSynthesisUtterance();
+        speechMsg.rate = prop.rate || 1;
+        speechMsg.pitch = prop.pitch || 1;
+        speechMsg.text = dayOfWeek;
 
-	default :
-		return "info";
+        window.speechSynthesis.speak(speechMsg);
+	},
+
+	getDayOfWeek : function(date){
+	    let that = this;
+
+	    let week = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+	    let dayOfWeek = week[new Date(date).getDay()];
+
+	    return dayOfWeek;
 	}
 }
