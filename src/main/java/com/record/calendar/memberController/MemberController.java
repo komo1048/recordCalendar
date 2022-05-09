@@ -3,11 +3,16 @@ package com.record.calendar.memberController;
 import com.record.calendar.memberDto.MemberDto;
 import com.record.calendar.memberService.MemberService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 @Controller
 public class MemberController {
@@ -17,7 +22,12 @@ public class MemberController {
 
     @RequestMapping("/")
     public String loginPage(){
-        return "login.html";
+        return "login";
+    }
+
+    @RequestMapping("/register")
+    public String registerPage(){
+        return "register";
     }
 
     @GetMapping("/member/register")
@@ -30,5 +40,13 @@ public class MemberController {
     @ResponseBody
     public int idCheck(MemberDto memberDto){
         return memberService.checkId(memberDto);
+    }
+
+    @GetMapping("/member/login")
+    @ResponseBody
+    public int login(MemberDto memberDto, HttpServletRequest request){
+        HttpSession session = request.getSession();
+        session.setAttribute("loginMember", memberDto.getId());
+        return memberService.login(memberDto);
     }
 }

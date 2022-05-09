@@ -11,4 +11,14 @@
     <select id="checkId" parameterType="com.record.calendar.memberDto.MemberDto" resultType="integer">
         select NVL(count(*),0) from member where id = #{id}
     </select>
+
+    <select id="login" parameterType="com.record.calendar.memberDto.MemberDto" resultType="java.lang.Boolean">
+        select IF(count(*) > 0 ,1, 0) from member where id = #{id}
+    </select>
+
+    <select id="findMember" parameterType="com.record.calendar.memberDto.MemberDto"
+            resultType="com.record.calendar.memberDto.MemberDto">
+        select * from member where id = #{id}
+
+    </select>
 </mapper>

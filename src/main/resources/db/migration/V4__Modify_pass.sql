@@ -1,0 +1,1 @@
+alter table member MODIFY password varchar(100);

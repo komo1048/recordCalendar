@@ -8,4 +8,8 @@ public interface MemberDao {
     int registerMember(MemberDto memberDto);
 
     int checkId(MemberDto memberDto);
+
+    boolean login(MemberDto memberDto);
+
+    MemberDto findMember(MemberDto memberDto);
 }
