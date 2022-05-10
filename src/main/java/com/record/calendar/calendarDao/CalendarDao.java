@@ -11,11 +11,11 @@ public interface CalendarDao {
 
 	public int insertTodayWork(CalendarDto calendarDto);
 
-	public ArrayList<CalendarDto> getAllPlanList();
+	public ArrayList<CalendarDto> getAllPlanList(String loginMember);
 
-	public CalendarDto getSelectPlan(String start);
+	public CalendarDto getSelectPlan(String start, String loginMember);
 
-	public int deletePlan(String start);
+	public int deletePlan(String start, String loginMember);
 	
 	public int updateTodayWork(CalendarDto calendarDto);
 }

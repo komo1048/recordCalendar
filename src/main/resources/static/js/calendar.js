@@ -20,7 +20,13 @@ $('DOMcontentLoaded', function(){
 				$("#content").val(plan.content);
 			});
 		},
-		events: getData.getMonthData(date),
+		eventSources: [
+		    {
+                events: getData.getMonthData(date),
+                backgroundColor: '#1d9895',
+                borderColor: '#1d9895'
+		    }
+		]
 	});
 	getData.initFn();
 	calendar.render();
@@ -37,13 +43,27 @@ let getData = {
 			let params = {
 				'start' : $('#start').val()
 			}
-			post('/deletePlan', params, function(result){
-				if(result > 0){
-					alertModal("삭제에 성공했습니다.", "success", 's');
-				}else{
-					alertModal("삭제에 실패했습니다.", "error", 'e');
-				}
-			});
+			Swal.fire({
+              title: '정말로 삭제 하시겠습니까?',
+              text: "삭제 시 복구가 불가능 합니다.",
+              icon: 'warning',
+              showCancelButton: true,
+              confirmButtonColor: '#3085d6',
+              cancelButtonColor: '#d33',
+              cancelButtonText: '취소',
+              confirmButtonText: '삭제'
+            }).then((result) => {
+              if (result.isConfirmed) {
+                 post('/deletePlan', params, function(result){
+                     if(result > 0){
+                         alertModal("삭제에 성공했습니다.", "success", 's');
+                     }else{
+                         alertModal("삭제에 실패했습니다.", "error", 'e');
+                     }
+                 });
+              }
+            })
+
 		});
 		
 		$('#workSave').click(function(){
@@ -65,10 +85,10 @@ let getData = {
 	getMonthData : function(date){
 		let getMonthData_return;
 		let params = {
-				'start' : date
-			}
+			'start' : date
+		}
 			$.ajax({
-				type:'get',
+				type:'post',
 				url:'/getMyPlan',
 				data: params,
 				dataType:'json',
@@ -113,4 +133,11 @@ let getData = {
 
 	    return dayOfWeek;
 	}
+}
+function openLeftMenu() {
+          document.getElementById("leftMenu").style.display = "block";
+        }
+
+function closeLeftMenu() {
+  document.getElementById("leftMenu").style.display = "none";
 }

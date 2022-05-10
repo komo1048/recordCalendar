@@ -7,7 +7,7 @@ function alertModal(text, title, icon) {
 		timer: 1500,
 		allowOutsideClick: false
 	}).then(function(){
-		window.location = window.location.pathname;
+		location.reload();
  	});
 
 }
@@ -19,7 +19,6 @@ function getAlertModalIcon(text){
 		return "error";
 	case "s" :
 		return "success";
-
 	default :
 		return "info";
 	}

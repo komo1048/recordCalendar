@@ -28,19 +28,19 @@ public class CalendarServiceImp implements CalendarService{
 	}
 
 	@Override
-	public String getAllPlan(String start) {
-		Gson gson = new Gson(); 
-		return gson.toJson(calendarDao.getAllPlanList());
+	public String getAllPlan(String loginMember) {
+		Gson gson = new Gson();
+		return gson.toJson(calendarDao.getAllPlanList(loginMember));
 	}
 
 	@Override
-	public CalendarDto getSelectPlan(String start) {
-		return calendarDao.getSelectPlan(start);
+	public CalendarDto getSelectPlan(String start, String loginMember) {
+		return calendarDao.getSelectPlan(start, loginMember);
 	}
 
 	@Override
-	public int deletePlan(String start) {
-		return calendarDao.deletePlan(start);
+	public int deletePlan(String start, String loginMember) {
+		return calendarDao.deletePlan(start, loginMember);
 	}
 
 

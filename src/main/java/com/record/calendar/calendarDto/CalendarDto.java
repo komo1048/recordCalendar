@@ -14,4 +14,5 @@ public class CalendarDto {
 	private String content;
 	private String start;
 	private String end;
+    private String user;
 }

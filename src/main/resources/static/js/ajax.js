@@ -1,5 +1,5 @@
 function post(url, param, onSuccess) {
-   return ajax(url, param, "get", onSuccess);
+   return ajax(url, param, "post", onSuccess);
 }
 
 function ajax(url, param, type, onSuccess) {

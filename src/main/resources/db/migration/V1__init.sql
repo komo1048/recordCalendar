@@ -1,4 +1,5 @@
 drop table if exists calendar;
+drop table if exists member;
 
 CREATE TABLE calendar(
 	id int auto_increment,

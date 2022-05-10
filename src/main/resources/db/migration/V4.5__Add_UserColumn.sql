@@ -1,0 +1,1 @@
+alter table calendar add user varchar(50);

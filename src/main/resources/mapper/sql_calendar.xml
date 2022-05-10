@@ -5,22 +5,22 @@
 
 <mapper namespace="com.record.calendar.calendarDao.CalendarDao">
 	<insert id="insertTodayWork">
-		insert into calendar (title, content, start) value (#{title}, #{content}, #{start})
+		insert into calendar (title, content, start, user) value (#{title}, #{content}, #{start}, #{user})
 	</insert>
 	
-	<select id="getAllPlanList" resultType="com.record.calendar.calendarDto.CalendarDto" parameterType="hashMap" >
-		select * from calendar
+	<select id="getAllPlanList" resultType="com.record.calendar.calendarDto.CalendarDto" parameterType="string" >
+		select * from calendar where user = #{loginMember}
 	</select>
 	
 	<select id="getSelectPlan" resultType="com.record.calendar.calendarDto.CalendarDto">
-		select * from calendar where start = #{start}
+		select * from calendar where start = #{start} and user = #{loginMember}
 	</select>
 	
 	<delete id="deletePlan">
-		delete from calendar where start = #{start}
+		delete from calendar where start = #{start} and user = #{loginMember}
 	</delete>
 	
 	<update id="updateTodayWork">
-		update calendar set title = #{title}, content = #{content} where start = #{start}
+		update calendar set title = #{title}, content = #{content} where start = #{start} and user = #{user}
 	</update>
 </mapper>    
