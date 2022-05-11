@@ -8,10 +8,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -57,5 +54,21 @@ public class MemberController {
     public String logout(HttpServletRequest request, HttpServletResponse response){
         new SecurityContextLogoutHandler().logout(request,response, SecurityContextHolder.getContext().getAuthentication());
         return "redirect:/";
+    }
+
+    @RequestMapping("/forgot")
+    public String forgotPassword(){
+        return "findPassword";
+    }
+
+    @PostMapping("/updateTempPwd")
+    @ResponseBody
+    public int updateTempPassword(MemberDto memberDto) {
+        return memberService.updateTempPassword(memberDto);
+    }
+
+    @GetMapping("/profile")
+    public String profile(){
+        return "profile";
     }
 }

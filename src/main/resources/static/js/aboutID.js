@@ -18,7 +18,7 @@ let login = {
                 }
             })
 
-        })
+        });
 
         $('#registerBtn').click(function(){
             let params = {
@@ -34,7 +34,7 @@ let login = {
 					setTimeout(function(){location.href="/register";}, 1500);
 				}
             })
-        })
+        });
 
         $('#logoutBtn').click(function(){
             Swal.fire({
@@ -49,6 +49,42 @@ let login = {
                    location.href="/member/logout";
                 }
             })
+        });
+
+        $('#resetPwd').click(function(){
+            let params = {
+                id : $('#id').val(),
+                uid : getUid()
+            }
+            Swal.fire({
+                icon: 'success',
+                text: '임시비밀번호는 '+ params.uid +'입니다.',
+                showConfirmButton : true
+            }).then(function(){
+                $('#pwd').val(params.uid);
+            });
+        });
+
+        $('#updateTempPwd').click(function(){
+            let params = {
+                id : $('#id').val(),
+                password : $('#pwd').val()
+            }
+
+            post('/updateTempPwd',params, function(result){
+                if(result > 0){
+                    Swal.fire({
+                        icon: 'success',
+                        text: '비밀번호 초기화가 되었습니다',
+                        showConfirmButton : true
+                    }).then(function(){
+                        location.href="/";
+                    });
+                }else{
+                    alertModal('비밀번호 초기화에 실패했습니다.', 'error', 'e');
+                }
+            })
+
         })
     }
 }
@@ -77,4 +113,11 @@ function checkPwd(){
     }else if(pwdCheck === pwd){
         $('#confirm_password').css("background-color", "#B0F6AC");
     }
+}
+
+function getUid() {
+    function s4() {
+        return Math.floor((1 + Math.random()) * 0x10000).toString(16).substring(1);
+    }
+    return s4();
 }

@@ -8,4 +8,6 @@ public interface MemberService {
     int checkId(MemberDto memberDto);
 
     int login(MemberDto memberDto);
+
+    int updateTempPassword(MemberDto memberDto);
 }

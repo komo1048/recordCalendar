@@ -12,4 +12,6 @@ public interface MemberDao {
     boolean login(MemberDto memberDto);
 
     MemberDto findMember(MemberDto memberDto);
+
+    int updateTempPwd(MemberDto memberDto);
 }

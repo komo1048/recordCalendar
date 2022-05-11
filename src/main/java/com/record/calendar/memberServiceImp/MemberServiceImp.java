@@ -39,12 +39,23 @@ public class MemberServiceImp implements MemberService {
 
     @Override
     public int login(MemberDto memberDto) {
-        if(checkPass(memberDto) && memberDao.login(memberDto)){
-            return 1;
-        }else{
-            logger.error("비밀번호가 일치하지 않습니다.");
+        try {
+            if(checkPass(memberDto) && memberDao.login(memberDto)){
+                return 1;
+            }else {
+                logger.error("비밀번호가 일치하지 않습니다.");
+                return 0;
+            }
+        } catch (Exception e) {
+            logger.error("없는 회원이거나 비밀번호가 일치하지 않습니다.");
             return 0;
         }
+    }
+
+    @Override
+    public int updateTempPassword(MemberDto memberDto) {
+        memberDto.setPassword(encodePassword(memberDto.getPassword()));
+        return memberDao.updateTempPwd(memberDto);
     }
 
     @Transactional
@@ -60,4 +71,7 @@ public class MemberServiceImp implements MemberService {
             return false;
         }
     }
+
+
+
 }

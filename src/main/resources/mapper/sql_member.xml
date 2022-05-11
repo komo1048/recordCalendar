@@ -19,6 +19,9 @@
     <select id="findMember" parameterType="com.record.calendar.memberDto.MemberDto"
             resultType="com.record.calendar.memberDto.MemberDto">
         select * from member where id = #{id}
-
     </select>
+
+    <update id="updateTempPwd" parameterType="com.record.calendar.memberDto.MemberDto">
+        update member set password = #{password} where id = #{id}
+    </update>
 </mapper>
