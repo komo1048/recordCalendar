@@ -25,10 +25,6 @@ public class CalendarController {
     @RequestMapping("/calendar")
     public String main(@SessionAttribute(name="loginMember", required = false) String loginMember, Model model){
 
-        if(loginMember == null || loginMember == ""){
-            return "redirect:/";
-        }
-
         model.addAttribute("member", loginMember);
         return "calendar";
     }

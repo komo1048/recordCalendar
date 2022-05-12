@@ -1,7 +1,9 @@
 package com.record.calendar.calendarDao;
 
 import java.util.ArrayList;
+import java.util.List;
 
+import com.record.calendar.paging.Criteria;
 import org.apache.ibatis.annotations.Mapper;
 
 import com.record.calendar.calendarDto.CalendarDto;
@@ -18,4 +20,6 @@ public interface CalendarDao {
 	public int deletePlan(String start, String loginMember);
 	
 	public int updateTodayWork(CalendarDto calendarDto);
+
+    List<CalendarDto> getPlan(Criteria criteria, String loginMember);
 }

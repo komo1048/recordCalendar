@@ -5,6 +5,8 @@ $(document).ready(function(){
 
 let login = {
     initFn : function(){
+        let that = this;
+
         $('#loginBtn').click(function(){
             let params = {
                 id : $('#id').val(),
@@ -21,10 +23,7 @@ let login = {
         });
 
         $('#registerBtn').click(function(){
-            let params = {
-                id : $('#id').val(),
-                password : $('#password').val()
-            }
+            let params = $('#registerForm').serializeObject();
             post('/member/register', params, function(result){
 				if(result > 0){
 					alertModal("회원가입에 성공했습니다.", "success", 's');
@@ -84,7 +83,12 @@ let login = {
                     alertModal('비밀번호 초기화에 실패했습니다.', 'error', 'e');
                 }
             })
+        });
 
+        $("#loginForm").keypress(function (e){
+            if(e.keyCode === 13){
+                $("#loginBtn").trigger("click");
+            }
         })
     }
 }

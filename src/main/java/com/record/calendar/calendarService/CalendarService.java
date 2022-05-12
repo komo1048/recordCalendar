@@ -1,6 +1,9 @@
 package com.record.calendar.calendarService;
 
 import com.record.calendar.calendarDto.CalendarDto;
+import com.record.calendar.paging.Criteria;
+
+import java.util.List;
 
 public interface CalendarService {
 	public int insertTodayWork(CalendarDto calendarDto);
@@ -10,4 +13,6 @@ public interface CalendarService {
 	public CalendarDto getSelectPlan(String start, String loginMember);
 
 	public int deletePlan(String start,String loginMember);
+
+    List<CalendarDto> getPagePlan(Criteria criteria,String loginMember);
 }

@@ -5,7 +5,7 @@
 
 <mapper namespace="com.record.calendar.memberDao.MemberDao">
     <insert id="registerMember" parameterType="com.record.calendar.memberDto.MemberDto">
-        insert into member (id, password) values (#{id}, #{password})
+        insert into member (id, password, email, name, phone, address, job) values (#{id}, #{password}, #{email}, #{name}, #{phone}, #{address}, #{job})
     </insert>
 
     <select id="checkId" parameterType="com.record.calendar.memberDto.MemberDto" resultType="integer">

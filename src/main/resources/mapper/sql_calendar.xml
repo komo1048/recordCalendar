@@ -23,4 +23,8 @@
 	<update id="updateTodayWork">
 		update calendar set title = #{title}, content = #{content} where start = #{start} and user = #{user}
 	</update>
+
+    <select id="getPlan" resultType="com.record.calendar.calendarDto.CalendarDto">
+        select * from calendar where user = #{loginMember} order by id limit 5
+    </select>
 </mapper>    

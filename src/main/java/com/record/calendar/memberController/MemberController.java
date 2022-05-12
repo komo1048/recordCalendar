@@ -1,24 +1,35 @@
 package com.record.calendar.memberController;
 
+import com.google.gson.Gson;
+import com.record.calendar.calendarDto.CalendarDto;
+import com.record.calendar.calendarService.CalendarService;
 import com.record.calendar.memberDto.MemberDto;
 import com.record.calendar.memberService.MemberService;
+import com.record.calendar.paging.Criteria;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler;
 import org.springframework.stereotype.Controller;
-import org.springframework.transaction.annotation.Transactional;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import java.util.List;
 
 @Controller
 public class MemberController {
 
     @Autowired
     MemberService memberService;
+
+    @Autowired
+    CalendarService calendarService;
 
     @RequestMapping("/")
     public String loginPage(){
@@ -68,7 +79,15 @@ public class MemberController {
     }
 
     @GetMapping("/profile")
-    public String profile(){
+    public String profile(@SessionAttribute(name="loginMember", required = false) String loginMember, Model model, @ModelAttribute("criteria")Criteria criteria){
+
+        MemberDto memberDto = memberService.getMember(loginMember);
+        Gson gson = new Gson();
+        CalendarDto[] calendarDto = gson.fromJson(calendarService.getAllPlan(loginMember), CalendarDto[].class);
+        List<CalendarDto> showPlan = calendarService.getPagePlan(criteria,loginMember);
+
+        model.addAttribute("member", memberDto);
+        model.addAttribute("calendar", calendarDto);
         return "profile";
     }
 }

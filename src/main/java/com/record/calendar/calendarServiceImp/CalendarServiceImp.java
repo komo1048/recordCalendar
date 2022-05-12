@@ -1,14 +1,19 @@
 package com.record.calendar.calendarServiceImp;
 
+import com.record.calendar.paging.Criteria;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Service;
 
 import com.google.gson.Gson;
 import com.record.calendar.calendarDao.CalendarDao;
 import com.record.calendar.calendarDto.CalendarDto;
 import com.record.calendar.calendarService.CalendarService;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Service
 public class CalendarServiceImp implements CalendarService{
@@ -43,5 +48,10 @@ public class CalendarServiceImp implements CalendarService{
 		return calendarDao.deletePlan(start, loginMember);
 	}
 
+    @Override
+    public List<CalendarDto> getPagePlan(Criteria criteria, String loginMember) {
+
+        return calendarDao.getPlan(criteria, loginMember);
+    }
 
 }

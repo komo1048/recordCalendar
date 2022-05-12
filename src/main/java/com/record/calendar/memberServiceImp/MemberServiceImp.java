@@ -58,13 +58,20 @@ public class MemberServiceImp implements MemberService {
         return memberDao.updateTempPwd(memberDto);
     }
 
+    @Override
+    public MemberDto getMember(String loginMember) {
+        MemberDto memberDto = memberDao.findMember(loginMember);
+        memberDto.setRegdate(dateFormatModify(memberDto.getRegdate()));
+        return memberDto;
+    }
+
     @Transactional
     public String encodePassword(String pass){
         return passwordEncoder.encode(pass);
     }
 
     public boolean checkPass(MemberDto memberDto){
-        MemberDto member = memberDao.findMember(memberDto);
+        MemberDto member = memberDao.findMember(memberDto.getId());
         if(passwordEncoder.matches(memberDto.getPassword(), member.getPassword())){
             return true;
         }else{
@@ -72,6 +79,9 @@ public class MemberServiceImp implements MemberService {
         }
     }
 
+    public String dateFormatModify(String format){
+        return format.split(" ")[0];
+    }
 
 
 }

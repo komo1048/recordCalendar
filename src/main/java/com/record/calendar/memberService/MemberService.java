@@ -10,4 +10,6 @@ public interface MemberService {
     int login(MemberDto memberDto);
 
     int updateTempPassword(MemberDto memberDto);
+
+    MemberDto getMember(String loginMember);
 }

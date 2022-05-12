@@ -11,7 +11,9 @@ public interface MemberDao {
 
     boolean login(MemberDto memberDto);
 
-    MemberDto findMember(MemberDto memberDto);
+    MemberDto findMember(String loginMember);
 
     int updateTempPwd(MemberDto memberDto);
+
+    MemberDto getWhoIs(String loginMember);
 }
