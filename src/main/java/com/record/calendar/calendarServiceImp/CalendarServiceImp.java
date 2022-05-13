@@ -12,8 +12,7 @@ import com.record.calendar.calendarDao.CalendarDao;
 import com.record.calendar.calendarDto.CalendarDto;
 import com.record.calendar.calendarService.CalendarService;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 @Service
 public class CalendarServiceImp implements CalendarService{
@@ -50,8 +49,12 @@ public class CalendarServiceImp implements CalendarService{
 
     @Override
     public List<CalendarDto> getPagePlan(Criteria criteria, String loginMember) {
-
-        return calendarDao.getPlan(criteria, loginMember);
+        List<CalendarDto> calList = Collections.emptyList();
+        Map<String, Object> map = new HashMap<>();
+        map.put("criteria", criteria);
+        map.put("loginMember", loginMember);
+        int calTotalCnt = calendarDao.planTotalCnt(map);
+        return calendarDao.getPlan(map);
     }
 
 }

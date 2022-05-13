@@ -82,9 +82,7 @@ public class MemberController {
     public String profile(@SessionAttribute(name="loginMember", required = false) String loginMember, Model model, @ModelAttribute("criteria")Criteria criteria){
 
         MemberDto memberDto = memberService.getMember(loginMember);
-        Gson gson = new Gson();
-        CalendarDto[] calendarDto = gson.fromJson(calendarService.getAllPlan(loginMember), CalendarDto[].class);
-        List<CalendarDto> showPlan = calendarService.getPagePlan(criteria,loginMember);
+        List<CalendarDto> calendarDto = calendarService.getPagePlan(criteria,loginMember);
 
         model.addAttribute("member", memberDto);
         model.addAttribute("calendar", calendarDto);

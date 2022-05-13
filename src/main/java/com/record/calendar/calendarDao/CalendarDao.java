@@ -2,6 +2,7 @@ package com.record.calendar.calendarDao;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import com.record.calendar.paging.Criteria;
 import org.apache.ibatis.annotations.Mapper;
@@ -21,5 +22,7 @@ public interface CalendarDao {
 	
 	public int updateTodayWork(CalendarDto calendarDto);
 
-    List<CalendarDto> getPlan(Criteria criteria, String loginMember);
+    List<CalendarDto> getPlan(Map<String, Object> map);
+
+    public int planTotalCnt(Map<String, Object> map);
 }

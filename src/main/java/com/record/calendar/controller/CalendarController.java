@@ -1,6 +1,7 @@
 package com.record.calendar.controller;
 
 import com.record.calendar.memberDto.MemberDto;
+import com.record.calendar.paging.Criteria;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -12,6 +13,7 @@ import com.record.calendar.calendarService.CalendarService;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import java.util.List;
 import java.util.logging.Logger;
 
 @Controller
@@ -53,4 +55,9 @@ public class CalendarController {
 	public int planDelete(@RequestParam(value ="start") String start, @SessionAttribute(name="loginMember", required = false) String loginMember) {
 		return calendarService.deletePlan(start, loginMember);
 	}
+
+    @GetMapping("/paging")
+    public List<CalendarDto> getPaging(@RequestParam(value = "page") int page, @SessionAttribute(name="loginMember", required = false) String loginMember, @ModelAttribute("criteria") Criteria criteria){
+        return calendarService.getPagePlan(criteria,loginMember);
+    }
 }
