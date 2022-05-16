@@ -49,12 +49,28 @@ public class CalendarServiceImp implements CalendarService{
 
     @Override
     public List<CalendarDto> getPagePlan(Criteria criteria, String loginMember) {
-        List<CalendarDto> calList = Collections.emptyList();
         Map<String, Object> map = new HashMap<>();
         map.put("criteria", criteria);
         map.put("loginMember", loginMember);
-        int calTotalCnt = calendarDao.planTotalCnt(map);
+
         return calendarDao.getPlan(map);
     }
 
+    @Override
+    public List<CalendarDto> getSelectPagePlan(int page, String loginMember, Criteria criteria) {
+        criteria.setCurrentPageNo(page);
+        Map<String, Object> map = new HashMap<>();
+        map.put("criteria", criteria);
+        map.put("loginMember", loginMember);
+        return calendarDao.getPlan(map);
+    }
+
+    @Override
+    public int getPageNumber(Criteria criteria, String loginMember) {
+        Map<String, Object> map = new HashMap<>();
+        map.put("criteria", criteria);
+        map.put("loginMember", loginMember);
+        int calTotalCnt = (int)Math.ceil((double) calendarDao.planTotalCnt(map) / (double) criteria.getRecordsPerPage());
+        return calTotalCnt;
+    }
 }

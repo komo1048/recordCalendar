@@ -57,7 +57,12 @@ public class CalendarController {
 	}
 
     @GetMapping("/paging")
-    public List<CalendarDto> getPaging(@RequestParam(value = "page") int page, @SessionAttribute(name="loginMember", required = false) String loginMember, @ModelAttribute("criteria") Criteria criteria){
+    public List<CalendarDto> getPaging(@SessionAttribute(name="loginMember", required = false) String loginMember, @ModelAttribute("criteria") Criteria criteria){
         return calendarService.getPagePlan(criteria,loginMember);
+    }
+
+    @GetMapping("/select/pageNumber")
+    public List<CalendarDto> selectPage(@RequestParam(name = "page") int page, @SessionAttribute(name="loginMember", required = false) String loginMember, @ModelAttribute("criteria") Criteria criteria){
+        return calendarService.getSelectPagePlan(page, loginMember, criteria);
     }
 }

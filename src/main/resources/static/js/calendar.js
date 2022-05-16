@@ -132,5 +132,16 @@ let getData = {
 	    let dayOfWeek = week[new Date(date).getDay()];
 
 	    return dayOfWeek;
+	},
+
+	selectPage : function(page){
+	    let params = {
+	        page : page
+	    }
+
+	    post('/select/pageNumber', params, function(data){
+	        console.log(data);
+	    })
+
 	}
 }

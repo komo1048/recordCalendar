@@ -83,7 +83,9 @@ public class MemberController {
 
         MemberDto memberDto = memberService.getMember(loginMember);
         List<CalendarDto> calendarDto = calendarService.getPagePlan(criteria,loginMember);
+        int pageNumber = calendarService.getPageNumber(criteria,loginMember);
 
+        model.addAttribute("pageNumber", pageNumber);
         model.addAttribute("member", memberDto);
         model.addAttribute("calendar", calendarDto);
         return "profile";
