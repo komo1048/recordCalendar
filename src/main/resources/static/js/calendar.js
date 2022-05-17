@@ -139,9 +139,54 @@ let getData = {
 	        page : page
 	    }
 
-	    post('/select/pageNumber', params, function(data){
-	        console.log(data);
-	    })
+	    $.ajax({
+            type:'post',
+            url:'/select/pageNumber',
+            data: params,
+            dataType:'text',
+            async: false,
+            success: function(data){
+                $(".profile__comments").empty();
+                $(".profile__comments").append(data);
+            },
+            error: function(request, status, error){
+                alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
+            }
+        });
+	},
 
+	modifyPlan : function(date){
+	    let params = {
+	        start : date
+	    }
+	    post('/getTodayPlan', params, function(data){
+	        $("#exampleModal").modal('show');
+            $("#exampleModalLabel").html(data.start+' 한 일');
+            $("#start").val(data.start);
+            $("#title").val(data.title);
+            $("#content").val(data.content);
+
+	    })
+	},
+
+	searchTitle : function(){
+	    let params = {
+	        search : $('#searchTitle').val()
+	    }
+
+        $.ajax({
+            type:'post',
+            url:'/searchPlan',
+            data: params,
+            dataType:'text',
+            async: false,
+            success: function(data){
+                $(".profile__comments").empty();
+                $(".profile__comments").append(data);
+            },
+            error: function(request, status, error){
+                alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
+            }
+        });
 	}
 }

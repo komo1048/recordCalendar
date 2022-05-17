@@ -61,8 +61,15 @@ public class CalendarController {
         return calendarService.getPagePlan(criteria,loginMember);
     }
 
-    @GetMapping("/select/pageNumber")
-    public List<CalendarDto> selectPage(@RequestParam(name = "page") int page, @SessionAttribute(name="loginMember", required = false) String loginMember, @ModelAttribute("criteria") Criteria criteria){
+    @PostMapping("/select/pageNumber")
+    @ResponseBody
+    public String selectPage(@RequestParam int page, @SessionAttribute(name="loginMember", required = false) String loginMember, @ModelAttribute("criteria") Criteria criteria){
         return calendarService.getSelectPagePlan(page, loginMember, criteria);
+    }
+
+    @PostMapping("/searchPlan")
+    @ResponseBody
+    public String getSearchPlan(@RequestParam String search, @SessionAttribute(name="loginMember", required = false) String loginMember, @ModelAttribute("criteria") Criteria criteria){
+        return calendarService.getSearchPlan(search, loginMember, criteria);
     }
 }

@@ -1,6 +1,7 @@
 package com.record.calendar.calendarServiceImp;
 
 import com.record.calendar.paging.Criteria;
+import com.record.calendar.paging.PagingServiceImp;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -57,12 +58,12 @@ public class CalendarServiceImp implements CalendarService{
     }
 
     @Override
-    public List<CalendarDto> getSelectPagePlan(int page, String loginMember, Criteria criteria) {
+    public String getSelectPagePlan(int page, String loginMember, Criteria criteria) {
         criteria.setCurrentPageNo(page);
         Map<String, Object> map = new HashMap<>();
         map.put("criteria", criteria);
         map.put("loginMember", loginMember);
-        return calendarDao.getPlan(map);
+        return new PagingServiceImp().viewPageContent(calendarDao.getPlan(map));
     }
 
     @Override
@@ -72,5 +73,14 @@ public class CalendarServiceImp implements CalendarService{
         map.put("loginMember", loginMember);
         int calTotalCnt = (int)Math.ceil((double) calendarDao.planTotalCnt(map) / (double) criteria.getRecordsPerPage());
         return calTotalCnt;
+    }
+
+    @Override
+    public String getSearchPlan(String search, String loginMember, Criteria criteria) {
+        Map<String, Object> map = new HashMap<>();
+        criteria.setSearchKeyword(search);
+        map.put("criteria", criteria);
+        map.put("loginMember", loginMember);
+        return new PagingServiceImp().viewPageContent(calendarDao.getSearchPlan(map));
     }
 }

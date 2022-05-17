@@ -52,36 +52,11 @@
                     </table>
                 </div>
             </div>
-
-            <!-- Community
-            <div class="panel panel-default">
-                <div class="panel-heading">
-                    <h4 class="panel-title">Community</h4>
-                </div>
-                <div class="panel-body">
-                    <table class="table profile__table">
-                        <tbody>
-                        <tr>
-                            <th><strong>Comments</strong></th>
-                            <td>58584</td>
-                        </tr>
-                        <tr>
-                            <th><strong>Join Date</strong></th>
-                            <td th:text="${member.regdate}"></td>
-                        </tr>
-                        <tr>
-                            <th><strong>Last login</strong></th>
-                            <td>1 day ago</td>
-                        </tr>
-                        </tbody>
-                    </table>
-                </div>
-            </div> -->
-
             <!-- Latest posts -->
             <div class="panel panel-default">
                 <div class="panel-heading">
-                    <h4 class="panel-title">Latest posts</h4>
+                    <h4 class="panel-title">Calendar Posts</h4>
+                    <input type="text" class="form-control search-menu" placeholder="Search..." id="searchTitle" oninput="getData.searchTitle()">
                 </div>
                 <div class="panel-body">
                     <div class="profile__comments">
@@ -89,7 +64,7 @@
                             <div class="profile-comments__item">
                                 <div class="profile-comments__controls">
                                     <a href="#"><i class="fa fa-share-square-o"></i></a>
-                                    <a href="#"><i class="fa fa-edit"></i></a>
+                                    <a href="#" th:data-start="${calendar.start}" th:onclick="getData.modifyPlan(this.getAttribute('data-start'))"><i class="fa fa-edit"></i></a>
                                     <a href="#"><i class="fa fa-trash-o"></i></a>
                                 </div>
                                 <div class="profile-comments__avatar">
@@ -106,14 +81,16 @@
                                 </div>
                             </div>
                         </th:block>
-                        <nav aria-label="Page navigation example">
-                            <ul class="pagination">
-                                <th:block th:each="m : ${#numbers.sequence(1,pageNumber)}">
-                                    <li class="page-item"><a class="page-link" href="#" th:text="${m}" onclick="getData.selectPage(${m})"></a></li>
-                                </th:block>
-                            </ul>
-                        </nav>
                     </div>
+                    <nav aria-label="Page navigation example">
+                        <ul class="pagination">
+                            <th:block th:if="${pageNumber}>0">
+                                <th:block th:each="m : ${#numbers.sequence(1,pageNumber)}">
+                                    <li class="page-item"><a class="page-link" href="#" th:text="${m}" th:data-page="${m}" th:onclick="getData.selectPage(this.getAttribute('data-page'))"></a></li>
+                                </th:block>
+                            </th:block>
+                        </ul>
+                    </nav>
                 </div>
             </div>
 

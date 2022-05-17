@@ -25,4 +25,6 @@ public interface CalendarDao {
     List<CalendarDto> getPlan(Map<String, Object> map);
 
     public int planTotalCnt(Map<String, Object> map);
+
+    List<CalendarDto> getSearchPlan(Map<String, Object> map);
 }

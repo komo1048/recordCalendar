@@ -16,7 +16,9 @@ public interface CalendarService {
 
     List<CalendarDto> getPagePlan(Criteria criteria,String loginMember);
 
-    List<CalendarDto> getSelectPagePlan(int page, String loginMember, Criteria criteria);
+    String getSelectPagePlan(int page, String loginMember, Criteria criteria);
 
     int getPageNumber(Criteria criteria, String loginMember);
+
+    String getSearchPlan(String search, String loginMember, Criteria criteria);
 }
