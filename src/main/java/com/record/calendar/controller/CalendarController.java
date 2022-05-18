@@ -14,6 +14,7 @@ import com.record.calendar.calendarService.CalendarService;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.util.List;
+import java.util.Map;
 import java.util.logging.Logger;
 
 @Controller
@@ -56,20 +57,21 @@ public class CalendarController {
 		return calendarService.deletePlan(start, loginMember);
 	}
 
-    @GetMapping("/paging")
-    public List<CalendarDto> getPaging(@SessionAttribute(name="loginMember", required = false) String loginMember, @ModelAttribute("criteria") Criteria criteria){
-        return calendarService.getPagePlan(criteria,loginMember);
-    }
-
     @PostMapping("/select/pageNumber")
     @ResponseBody
-    public String selectPage(@RequestParam int page, @SessionAttribute(name="loginMember", required = false) String loginMember, @ModelAttribute("criteria") Criteria criteria){
-        return calendarService.getSelectPagePlan(page, loginMember, criteria);
+    public String selectPage(@RequestParam int page, @SessionAttribute(name="loginMember", required = false) String loginMember){
+        return calendarService.getSelectPagePlan(page, loginMember);
     }
 
     @PostMapping("/searchPlan")
     @ResponseBody
-    public String getSearchPlan(@RequestParam String search, @SessionAttribute(name="loginMember", required = false) String loginMember, @ModelAttribute("criteria") Criteria criteria){
-        return calendarService.getSearchPlan(search, loginMember, criteria);
+    public Map<String, Object> getSearchPlan(@RequestParam String search, @RequestParam String searchOption, @SessionAttribute(name="loginMember", required = false) String loginMember){
+        return calendarService.getSearchPlan(search, searchOption, loginMember);
+    }
+
+    @PostMapping("/search/selectNumber")
+    @ResponseBody
+    public String searchSelectPage(@RequestParam int page,@RequestParam String search, @SessionAttribute(name="loginMember", required = false) String loginMember){
+        return calendarService.getSearchSelectPage(page, search, loginMember);
     }
 }

@@ -14,7 +14,7 @@
                 </div>
                 <div class="panel-body">
                     <div class="profile__avatar">
-                        <img src="https://bootdey.com/img/Content/avatar/avatar5.png" alt="...">
+                        <i class="bi bi-person-badge fa-5x"></i>
                     </div>
                     <div class="profile__header">
                         <h4 th:text="${member.name}"> <small>Administrator</small></h4>
@@ -56,7 +56,12 @@
             <div class="panel panel-default">
                 <div class="panel-heading">
                     <h4 class="panel-title">Calendar Posts</h4>
-                    <input type="text" class="form-control search-menu" placeholder="Search..." id="searchTitle" oninput="getData.searchTitle()">
+                    <select class="form-control search-option" id="searchOption">
+                        <option value="title">제목&nbsp; </option>
+                        <option value="content">내용&nbsp; </option>
+                        <option value="start">날짜&nbsp; </option>
+                    </select>
+                    <input type="text" class="form-control search-menu" placeholder="Search..." id="searchKeyword" onkeyup="getData.searchTitle()">
                 </div>
                 <div class="panel-body">
                     <div class="profile__comments">
@@ -68,7 +73,7 @@
                                     <a href="#"><i class="fa fa-trash-o"></i></a>
                                 </div>
                                 <div class="profile-comments__avatar">
-                                    <img src="https://bootdey.com/img/Content/avatar/avatar1.png" alt="...">
+                                    <i class="bi bi-calendar-check-fill fa-2x"></i>
                                 </div>
                                 <div class="profile-comments__body">
                                     <h5 class="profile-comments__sender">
@@ -93,7 +98,6 @@
                     </nav>
                 </div>
             </div>
-
         </div>
         <div class="col-xs-12 col-sm-3">
 

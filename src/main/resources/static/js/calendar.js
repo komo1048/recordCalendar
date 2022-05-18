@@ -171,12 +171,40 @@ let getData = {
 
 	searchTitle : function(){
 	    let params = {
-	        search : $('#searchTitle').val()
+	        search : $('#searchKeyword').val(),
+	        searchOption : $('#searchOption option:selected').val()
+	    }
+	    let keyupTimer;
+	    clearTimeout(keyupTimer);
+	    keyupTimer = setTimeout(function(){
+	        $.ajax({
+                type:'post',
+                url:'/searchPlan',
+                data: params,
+                dataType:'json',
+                async: false,
+                success: function(data){
+                    $(".profile__comments").empty();
+                    $(".profile__comments").append(data.searchPlan);
+                    $(".pagination").empty();
+                    $(".pagination").append(data.searchPaging);
+                },
+                error: function(request, status, error){
+                    alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
+                }
+            });
+	    }, 800);
+	},
+
+	searchSelectPage : function(page){
+	    let params = {
+	        search : $('#searchKeyword').val(),
+	        page : page
 	    }
 
-        $.ajax({
+	    $.ajax({
             type:'post',
-            url:'/searchPlan',
+            url:'/search/selectNumber',
             data: params,
             dataType:'text',
             async: false,

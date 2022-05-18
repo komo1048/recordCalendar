@@ -17,7 +17,7 @@ public class PagingServiceImp {
                     "    <a href=\"#\"><i class=\"fa fa-trash-o\"></i></a>\n" +
                     "</div>\n" +
                     "<div class=\"profile-comments__avatar\">\n" +
-                    "    <img src=\"https://bootdey.com/img/Content/avatar/avatar1.png\" alt=\"...\">\n" +
+                    "    <i class=\"bi bi-calendar-check\"></i>\n" +
                     "</div>\n" +
                     "<div class=\"profile-comments__body\">\n" +
                     "    <h5 class=\"profile-comments__sender\">");
@@ -31,6 +31,14 @@ public class PagingServiceImp {
             sb.append("</div>\n");
         }
         sb.append("</div>");
+        return sb.toString();
+    }
+
+    public String viewPageNumber(int searchTotalCnt) {
+        StringBuilder sb = new StringBuilder();
+        for(int i = 1; i <= searchTotalCnt; i ++){
+            sb.append("<li class=\"page-item\"><a class=\"page-link\" href=\"#\" onclick=\"getData.searchSelectPage("+i+")\">"+i+"</a></li>");
+        }
         return sb.toString();
     }
 }

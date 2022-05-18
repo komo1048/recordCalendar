@@ -3,6 +3,7 @@ package com.record.calendar.paging;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
+import org.springframework.stereotype.Service;
 
 @Getter
 @Setter

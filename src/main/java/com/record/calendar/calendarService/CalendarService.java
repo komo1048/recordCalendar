@@ -4,6 +4,7 @@ import com.record.calendar.calendarDto.CalendarDto;
 import com.record.calendar.paging.Criteria;
 
 import java.util.List;
+import java.util.Map;
 
 public interface CalendarService {
 	public int insertTodayWork(CalendarDto calendarDto);
@@ -16,9 +17,11 @@ public interface CalendarService {
 
     List<CalendarDto> getPagePlan(Criteria criteria,String loginMember);
 
-    String getSelectPagePlan(int page, String loginMember, Criteria criteria);
+    String getSelectPagePlan(int page, String loginMember);
 
     int getPageNumber(Criteria criteria, String loginMember);
 
-    String getSearchPlan(String search, String loginMember, Criteria criteria);
+    Map<String, Object> getSearchPlan(String search,String searchOption, String loginMember);
+
+    String getSearchSelectPage(int page, String title, String loginMember);
 }

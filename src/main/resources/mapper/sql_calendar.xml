@@ -33,6 +33,10 @@
     </select>
 
     <select id="getSearchPlan" resultType="com.record.calendar.calendarDto.CalendarDto" parameterType="hashmap">
-        select * from calendar where user = #{loginMember} and title like CONCAT('%',#{criteria.searchKeyword},'%') order by start limit #{criteria.startPage}, #{criteria.recordsPerPage}
+        select * from calendar where user = #{loginMember} and ${criteria.searchType} like CONCAT('%',#{criteria.searchKeyword},'%') order by start limit #{criteria.startPage}, #{criteria.recordsPerPage}
+    </select>
+
+    <select id="searchTotalCnt" resultType="int" parameterType="hashmap">
+        select count(*) from calendar where user = #{loginMember} and title like CONCAT('%',#{criteria.searchKeyword},'%')
     </select>
 </mapper>    

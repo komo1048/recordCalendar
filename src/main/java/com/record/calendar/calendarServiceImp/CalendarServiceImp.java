@@ -20,7 +20,9 @@ public class CalendarServiceImp implements CalendarService{
 
 	@Autowired
 	CalendarDao calendarDao;
-	
+
+    Criteria criteria = new Criteria();
+
 	private Logger logger = LoggerFactory.getLogger(this.getClass());
 	
 	@Override
@@ -58,7 +60,7 @@ public class CalendarServiceImp implements CalendarService{
     }
 
     @Override
-    public String getSelectPagePlan(int page, String loginMember, Criteria criteria) {
+    public String getSelectPagePlan(int page, String loginMember) {
         criteria.setCurrentPageNo(page);
         Map<String, Object> map = new HashMap<>();
         map.put("criteria", criteria);
@@ -76,11 +78,29 @@ public class CalendarServiceImp implements CalendarService{
     }
 
     @Override
-    public String getSearchPlan(String search, String loginMember, Criteria criteria) {
+    public Map<String, Object> getSearchPlan(String search, String searchOption, String loginMember) {
         Map<String, Object> map = new HashMap<>();
         criteria.setSearchKeyword(search);
+        criteria.setSearchType(searchOption);
+        criteria.setCurrentPageNo(1);
         map.put("criteria", criteria);
         map.put("loginMember", loginMember);
+
+        Map<String, Object> plan = new HashMap<>();
+        plan.put("searchPlan", new PagingServiceImp().viewPageContent(calendarDao.getSearchPlan(map)));
+        plan.put("searchPaging",  new PagingServiceImp().viewPageNumber((int)Math.ceil((double) calendarDao.searchTotalCnt(map) / (double) criteria.getRecordsPerPage())));
+
+        return plan;
+    }
+
+    @Override
+    public String getSearchSelectPage(int page, String search, String loginMember) {
+        criteria.setCurrentPageNo(page);
+        criteria.setSearchKeyword(search);
+        Map<String, Object> map = new HashMap<>();
+        map.put("criteria", criteria);
+        map.put("loginMember", loginMember);
+
         return new PagingServiceImp().viewPageContent(calendarDao.getSearchPlan(map));
     }
 }
