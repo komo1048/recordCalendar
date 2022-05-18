@@ -17,7 +17,7 @@ public class PagingServiceImp {
                     "    <a href=\"#\"><i class=\"fa fa-trash-o\"></i></a>\n" +
                     "</div>\n" +
                     "<div class=\"profile-comments__avatar\">\n" +
-                    "    <i class=\"bi bi-calendar-check\"></i>\n" +
+                    "    <i class=\"bi bi-calendar-check-fill fa-2x\"></i>\n" +
                     "</div>\n" +
                     "<div class=\"profile-comments__body\">\n" +
                     "    <h5 class=\"profile-comments__sender\">");

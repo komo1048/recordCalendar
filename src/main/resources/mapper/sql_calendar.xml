@@ -37,6 +37,6 @@
     </select>
 
     <select id="searchTotalCnt" resultType="int" parameterType="hashmap">
-        select count(*) from calendar where user = #{loginMember} and title like CONCAT('%',#{criteria.searchKeyword},'%')
+        select count(*) from calendar where user = #{loginMember} and ${criteria.searchType} like CONCAT('%',#{criteria.searchKeyword},'%')
     </select>
 </mapper>    
