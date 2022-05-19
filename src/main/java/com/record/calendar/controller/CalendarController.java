@@ -1,8 +1,9 @@
 package com.record.calendar.controller;
 
-import com.record.calendar.memberDto.MemberDto;
-import com.record.calendar.paging.Criteria;
-import org.slf4j.LoggerFactory;
+
+import com.record.calendar.memberService.MemberService;
+import com.record.calendar.memberServiceImp.MemberServiceImp;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -10,25 +11,21 @@ import org.springframework.web.bind.annotation.*;
 
 import com.record.calendar.calendarDto.CalendarDto;
 import com.record.calendar.calendarService.CalendarService;
-
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
-import java.util.List;
 import java.util.Map;
-import java.util.logging.Logger;
 
 @Controller
+@Slf4j
 public class CalendarController {
 	
 	@Autowired
 	CalendarService calendarService;
 
-    private org.slf4j.Logger logger = LoggerFactory.getLogger(this.getClass());
+    @Autowired
+    MemberService memberService;
 
     @RequestMapping("/calendar")
     public String main(@SessionAttribute(name="loginMember", required = false) String loginMember, Model model){
-
-        model.addAttribute("member", loginMember);
+        model.addAttribute("member", memberService.getMember(loginMember));
         return "calendar";
     }
 	

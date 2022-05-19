@@ -1,16 +1,12 @@
 package com.record.calendar.memberController;
 
-import com.google.gson.Gson;
 import com.record.calendar.calendarDto.CalendarDto;
 import com.record.calendar.calendarService.CalendarService;
 import com.record.calendar.memberDto.MemberDto;
 import com.record.calendar.memberService.MemberService;
 import com.record.calendar.paging.Criteria;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
-import org.springframework.data.domain.Sort;
-import org.springframework.data.web.PageableDefault;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler;
 import org.springframework.stereotype.Controller;
@@ -23,6 +19,7 @@ import javax.servlet.http.HttpSession;
 import java.util.List;
 
 @Controller
+@Slf4j
 public class MemberController {
 
     @Autowired
@@ -88,6 +85,7 @@ public class MemberController {
         model.addAttribute("pageNumber", pageNumber);
         model.addAttribute("member", memberDto);
         model.addAttribute("calendar", calendarDto);
+
         return "profile";
     }
 }

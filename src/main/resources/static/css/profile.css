@@ -690,3 +690,15 @@ body{
     display : inline-block;
     width : 50%;
 }
+
+.profile-search{
+    display: inline-flex;
+    width : 50%;
+}
+
+.container {
+    width: auto;
+    margin-left : 300px;
+    float: left;
+}
+

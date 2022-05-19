@@ -17,7 +17,7 @@
                         <i class="bi bi-person-badge fa-5x"></i>
                     </div>
                     <div class="profile__header">
-                        <h4 th:text="${member.name}"> <small>Administrator</small></h4>
+                        <h4 th:text="${member.name}" id="username" th:value="${member.name}"> <small>Administrator</small></h4>
                         <p class="text-muted">
                             Lorem ipsum dolor sit amet, consectetur adipisicing elit. Non nostrum odio cum repellat veniam eligendi rem cumque magnam autem delectus qui.
                         </p>
@@ -48,6 +48,14 @@
                             <th><strong>Job</strong></th>
                             <td th:text="${member.job}">입력안함</td>
                         </tr>
+                        <tr>
+                            <th><strong>Phone</strong></th>
+                            <td th:text="${member.phone}">입력안함</td>
+                        </tr>
+                        <tr>
+                            <th><strong>E-mail</strong></th>
+                            <td th:text="${member.email}">입력안함</td>
+                        </tr>
                         </tbody>
                     </table>
                 </div>
@@ -61,7 +69,14 @@
                         <option value="content">내용&nbsp; </option>
                         <option value="start">날짜&nbsp; </option>
                     </select>
-                    <input type="text" class="form-control search-menu" placeholder="Search..." id="searchKeyword" onkeyup="getData.searchTitle()">
+                    <div class="input-group profile-search">
+                        <input type="text" class="form-control search-menu" placeholder="Search..." id="searchKeyword" onkeyup="getData.searchTitle()">
+                        <div class="input-group-append">
+                            <span class="input-group-text">
+                                <i class="fa fa-search" aria-hidden="true"></i>
+                            </span>
+                        </div>
+                    </div>
                 </div>
                 <div class="panel-body">
                     <div class="profile__comments">
@@ -98,49 +113,6 @@
                     </nav>
                 </div>
             </div>
-        </div>
-        <div class="col-xs-12 col-sm-3">
-
-            <!-- Contact user -->
-            <p>
-                <a href="#" class="profile__contact-btn btn btn-lg btn-block btn-info" data-toggle="modal" data-target="#profile__contact-form">
-                    Contact user
-                </a>
-            </p>
-
-            <hr class="profile__contact-hr">
-
-            <!-- Contact info -->
-            <div class="profile__contact-info">
-                <div class="profile__contact-info-item">
-                    <div class="profile__contact-info-icon">
-                        <i class="fa fa-phone"></i>
-                    </div>
-                    <div class="profile__contact-info-body">
-                        <h5 class="profile__contact-info-heading">Phone number</h5>
-                        <span th:text="${member.phone}"></span>
-                    </div>
-                </div>
-                <div class="profile__contact-info-item">
-                    <div class="profile__contact-info-icon">
-                        <i class="fa fa-envelope-square"></i>
-                    </div>
-                    <div class="profile__contact-info-body">
-                        <h5 class="profile__contact-info-heading">E-mail address</h5>
-                        <a th:text="${member.email}">입력안함</a>
-                    </div>
-                </div>
-                <div class="profile__contact-info-item">
-                    <div class="profile__contact-info-icon">
-                        <i class="fa fa-map-marker"></i>
-                    </div>
-                    <div class="profile__contact-info-body">
-                        <h5 class="profile__contact-info-heading">Work address</h5>
-                        <span th:text="${member.address}"></span>
-                    </div>
-                </div>
-            </div>
-
         </div>
     </div>
 </div>

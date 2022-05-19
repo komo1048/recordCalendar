@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<th:block th:fragment="chatting">
+<div id='chatt'>
+    <div id='talk'></div>
+    <div id='sendZone'>
+        <textarea id='msg' value='hi...' ></textarea>
+        <input type='button' value='전송' id='btnSend'>
+    </div>
+</div>
+<script src='/js/chat.js'></script>
+</th:block>
+</html>

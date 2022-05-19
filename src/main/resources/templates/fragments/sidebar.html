@@ -19,7 +19,7 @@
                 </div>
                 <div class="user-info">
           <span class="user-name" >
-            <strong></strong>
+            <strong th:text="${member.name}" id="username" th:value="${member.name}"></strong>
           </span>
                     <span class="user-role">Administrator</span>
                     <span class="user-status">
@@ -34,9 +34,9 @@
                     <div class="input-group">
                         <input type="text" class="form-control search-menu" placeholder="Search...">
                         <div class="input-group-append">
-              <span class="input-group-text">
-                <i class="fa fa-search" aria-hidden="true"></i>
-              </span>
+                              <span class="input-group-text">
+                                <i class="fa fa-search" aria-hidden="true"></i>
+                              </span>
                         </div>
                     </div>
                 </div>

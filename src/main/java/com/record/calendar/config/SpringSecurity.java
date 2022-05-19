@@ -14,11 +14,13 @@ public class SpringSecurity extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity httpSecurity) throws Exception {
         httpSecurity.csrf().disable()
                 .cors().disable()
-                .headers().frameOptions().disable()
+                .headers().frameOptions().sameOrigin()
                 .and()
                 .logout()
                 .logoutSuccessUrl("/")
                 .invalidateHttpSession(true);
+
+
     }
 
     @Bean
