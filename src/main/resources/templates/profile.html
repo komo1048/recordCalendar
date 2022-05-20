@@ -30,12 +30,23 @@
 
             <!-- User info -->
             <div class="panel panel-default">
-                <div class="panel-heading">
-                    <h4 class="panel-title">User info</h4>
+                <div class="panel-heading panel-heading-up">
+                    <h4 class="panel-title">
+                        User info
+                        <input type="button" class="btn btn-outline-success btn-sm modifybutton" id="modifybutton" value="수정"/>
+                        <input type="button" class="btn btn-outline-success btn-sm savebutton" style="display:none;" value="저장"/>
+                    </h4>
+
                 </div>
+
                 <div class="panel-body">
                     <table class="table profile__table">
-                        <tbody>
+                        <tbody id="userInfoTable">
+                        <tr>
+                            <th><strong>UserID</strong></th>
+                            <td th:text="${member.id}">입력안함</td>
+                        </tr>
+
                         <tr>
                             <th><strong>Location</strong></th>
                             <td th:text="${member.address}">입력안함</td>

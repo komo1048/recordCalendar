@@ -2,7 +2,6 @@ package com.record.calendar.controller;
 
 
 import com.record.calendar.memberService.MemberService;
-import com.record.calendar.memberServiceImp.MemberServiceImp;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;

@@ -1,5 +1,6 @@
 package com.record.calendar.memberController;
 
+
 import com.record.calendar.calendarDto.CalendarDto;
 import com.record.calendar.calendarService.CalendarService;
 import com.record.calendar.memberDto.MemberDto;
@@ -87,5 +88,20 @@ public class MemberController {
         model.addAttribute("calendar", calendarDto);
 
         return "profile";
+    }
+
+    @PostMapping("/member/passCheck")
+    @ResponseBody
+    public int passCheck(@SessionAttribute(name="loginMember", required = false) String loginMember, @RequestParam String password){
+        MemberDto memberDto = new MemberDto();
+        memberDto.setPassword(password);
+        memberDto.setId(loginMember);
+        return memberService.login(memberDto);
+    }
+
+    @PostMapping("/member/modifyProfile")
+    @ResponseBody
+    public int modifyProfile(MemberDto memberDto, @RequestParam(value = "pwdFlag") String pwdFlag){
+        return memberService.updateUser(memberDto, pwdFlag);
     }
 }

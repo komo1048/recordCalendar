@@ -4,6 +4,7 @@
                   xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
 
 <th:block th:fragment="modal">
+    <!-- 달력 입력 모달-->
         <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog">
             <div class="modal-dialog modal-lg" role="document">
                 <div class="modal-content">
@@ -30,5 +31,79 @@
                 </div>
             </div>
         </div>
+    <!-- //달력 입력 모달-->
+    <!-- 회원정보 수정 모달-->
+    <div class="modal fade" id="userInfoModal" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog modal-normal" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">정보 수정</h5>
+                    <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="userForm" method="post">
+                        <div class="search-advance in-all">
+                            <div class="form-group-inline">
+							<span class="inline-group">
+								<label class="section2">계정명</label>
+								<input type="text" class="form-control" id="modalId" name="id" maxlength="20" readonly="readonly">
+							</span>
+                            </div>
+                            <div class="form-group-inline minline">
+							<span class="inline-group">
+								<label class="section2">이름</label>
+								<input type="text" class="form-control" id="modalUserName" name="name" maxlength="10">
+							</span>
+                            </div>
+
+                            <div class="form-group-inline minline">
+							<span class="inline-group">
+								<label class="section2">지역</label>
+								<input type="text" class="form-control" id="modalLocation" name="address" maxlength="10">
+							</span>
+                            </div>
+
+                            <div class="form-group-inline minline">
+							<span class="inline-group">
+								<label class="section2">직업</label>
+								<input type="text" class="form-control" id="modalJob" name="job" maxlength="13">
+							</span>
+                            </div>
+
+                            <div class="form-group-inline minline">
+							<span class="inline-group">
+								<label class="section2">연락처</label>
+								<input type="tel" class="form-control" id="modalPhone" name="phone" maxlength="13">
+							</span>
+                            </div>
+
+                            <div class="form-group-inline minline">
+							<span class="inline-group">
+								<label class="section2">이메일</label>
+								<input type="email" class="form-control" id="modalEmail" name="email" maxlength="13">
+							</span>
+                            </div>
+
+                            <div class="form-group-inline minline">
+							<span class="inline-group">
+								<label class="section2">비밀번호</label>
+								<input type="password" class="form-control" id="password" name="password" maxlength="13">
+							</span>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <!-- 버튼 -->
+                <div class="btn_set">
+                    <span class="pull-right">
+                        <button type="button" class="btn btn-primary" id="userModifyBtn">수정</button>
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal" id="closeBtn">취소</button>
+				    </span>
+                </div>
+                <!-- // 버튼  -->
+            </div>
+        </div>
+    </div>
+    <!-- //회원정보 수정 모달 -->
 </th:block>
 </html>

@@ -24,4 +24,19 @@
     <update id="updateTempPwd" parameterType="com.record.calendar.memberDto.MemberDto">
         update member set password = #{password} where id = #{id}
     </update>
+
+    <update id="updateMember" parameterType="hashmap">
+        update member
+        <set>
+            <if test="pwdFlag == 1">
+                password = #{memberDto.password},
+            </if>
+            phone = #{memberDto.phone},
+            email = #{memberDto.email},
+            name = #{memberDto.name},
+            address = #{memberDto.address},
+            job = #{memberDto.job}
+        </set>
+        where id = #{memberDto.id}
+    </update>
 </mapper>

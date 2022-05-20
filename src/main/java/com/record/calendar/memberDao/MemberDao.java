@@ -3,6 +3,8 @@ package com.record.calendar.memberDao;
 import com.record.calendar.memberDto.MemberDto;
 import org.apache.ibatis.annotations.Mapper;
 
+import java.util.Map;
+
 @Mapper
 public interface MemberDao {
     int registerMember(MemberDto memberDto);
@@ -15,5 +17,5 @@ public interface MemberDao {
 
     int updateTempPwd(MemberDto memberDto);
 
-    MemberDto getWhoIs(String loginMember);
+    int updateMember(Map<String, Object> map);
 }

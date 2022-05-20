@@ -702,3 +702,24 @@ body{
     float: left;
 }
 
+.modifybutton {
+    float: right;
+    margin-bottom : 3px;
+}
+
+.search-advance{padding:10px; position:relative;}
+
+.form-group-inline .title-wrap{display:inline-block;position: absolute;}
+.form-group-inline .hightag-warp{display:inline-block;margin-left: 135px;}
+.search-advance .form-group-inline{padding:10px 5px;}
+.search-advance label.section-auto{width:auto; min-width:auto; padding-right:20px; font-size:14px; font-weight:300;}
+.search-advance label.section{min-width:105px;}
+.search-advance label.section2{min-width:150px;}
+.search-advance label.section3{min-width:120px;}
+.search-advance label.section4{min-width:90px;}
+.search-advance .form-control{width:auto; display:inline-block;}
+
+.pull-right{
+    float: right;
+    margin: 0px 15px 15px 0px;
+}

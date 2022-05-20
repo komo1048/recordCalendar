@@ -12,4 +12,6 @@ public interface MemberService {
     int updateTempPassword(MemberDto memberDto);
 
     MemberDto getMember(String loginMember);
+
+    int updateUser(MemberDto memberDto, String pwdFlag);
 }
